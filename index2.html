@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>모든 의견 보기</title>
+    <script>
+        async function loadComments() {
+            const response = await fetch('/comments');
+            const comments = await response.json();
+
+            const commentsDiv = document.getElementById('comments');
+            commentsDiv.innerHTML = comments.map((c, index) => `<p>${index + 1}. ${c}</p>`).join('');
+        }
+
+        window.onload = loadComments; // 페이지 로드 시 모든 의견 로드
+    </script>
+</head>
+<body>
+    <h1>모든 의견</h1>
+    <div id="comments">의견을 불러오는 중...</div>
+    <a href="/index1.html">의견 입력하기</a>
+</body>
+</html>
