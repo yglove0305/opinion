@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>의견 입력</title>
+    <script>
+        async function sendComment(event) {
+            event.preventDefault(); // 기본 폼 제출 동작 방지
+            const comment = document.getElementById('comment').value;
+
+            // 서버에 데이터 전송
+            const response = await fetch('/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ comment })
+            });
+
+            if (response.ok) {
+                alert("의견이 성공적으로 저장되었습니다!");
+                // 모든 의견 보기 페이지로 이동
+                window.location.href = "/index2.html";
+            } else {
+                alert("의견 저장 중 오류가 발생했습니다.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>의견 입력</h1>
+    <form onsubmit="sendComment(event)">
+        <label for="comment">의견:</label>
+        <input type="text" id="comment" name="comment" required>
+        <button type="submit">전송</button>
+    </form>
+</body>
+</html>
